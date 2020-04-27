@@ -115,7 +115,7 @@ class app extends Component {
                     </h3>
                     {this.state.selectedItems.map(item => <Mymeal key={item.itemId} selectedItem={item} handleRemoveClick={this.onRemoveClick}></Mymeal>)}
                     <button className="btn btn-primary" onClick={this.onSaveMeal}>Place Order</button>
-                    </div>
+                    </div>  
                     </React.Fragment>
                     }
                     {this.state.showLogin  && <Login handleNavigation={this.onNavigation} handleCheckedUser={this.onLogin}></Login>}
