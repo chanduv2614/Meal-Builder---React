@@ -32,7 +32,6 @@ class signup extends Component {
 
     axios.post('http://localhost:8081/api/createUser', data,config)
         .then(res => {
-          this.props.handleCreatedUser(res.data.userid);
           alert("Signup completed successfully. Redirecting to Login.");
           this.props.handleNavigation("login");
       })
@@ -42,7 +41,7 @@ class signup extends Component {
     render() { 
         return ( 
             <div className="container">
-            <div className="row">
+            <div className="row" >
               <div className="col-sm-9 col-md-7 col-lg-5 mx-auto">
                 <div className="card card-signin my-5">
                   <div className="card-body">

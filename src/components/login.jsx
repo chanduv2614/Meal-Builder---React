@@ -29,8 +29,8 @@ class login extends Component {
 
     axios.post('http://localhost:8081/api/checkUser', data,config)
         .then(res => {
-          if(res.data.username != "nouser"){
-            this.props.handleCheckedUser(res.data[0].username);
+          if(res.data[0].username != "nouser"){
+            this.props.handleCheckedUser(res.data[0].userid, res.data[0].username);
             this.setState({IsInvalidCredentails: false});
             this.props.handleNavigation("items");
           }

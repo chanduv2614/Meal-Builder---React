@@ -58,6 +58,8 @@ class app extends Component {
          }
          else if(rootname === "login"){
             this.setState({showHome:false, showItems : false, showSelectedItems: false, showLogin:true, showSignup:false});
+         }else if(rootname === "logout"){
+             this.onLogout();
          }
      }
 
@@ -66,12 +68,17 @@ class app extends Component {
         this.setState({selectedItems :selectedItems});
      }
 
-     onCreatedUser=(userid)=>{
+     onLogin=(userid, username)=>{
         this.setState({loggedUserId: userid});
+        this.setState({loggedinUserName: username});
      }
 
-     onLogin=(username)=>{
-        this.setState({loggedinUserName: username});
+     onLogout=()=>{
+        this.setState({items: []});
+        this.setState({selectedItems:[]});
+        this.setState({loggedUserId: 0});
+        this.setState({loggedinUserName: ''});
+        this.onNavigation("home");
      }
 
      onSaveMeal=()=>{
@@ -110,7 +117,7 @@ class app extends Component {
                     {this.state.showItems &&  <Items items={this.state.items} handleClick={this.onAddItemClick}></Items>}
                     {this.state.showSelectedItems && this.state.loggedinUserName != "" && <React.Fragment>
                         <div className="container">
-                    <h3>
+                    <h3 className="text-primary">
                         My Meal 
                     </h3>
                     {this.state.selectedItems.map(item => <Mymeal key={item.itemId} selectedItem={item} handleRemoveClick={this.onRemoveClick}></Mymeal>)}
@@ -119,8 +126,7 @@ class app extends Component {
                     </React.Fragment>
                     }
                     {this.state.showLogin  && <Login handleNavigation={this.onNavigation} handleCheckedUser={this.onLogin}></Login>}
-                    {this.state.showSignup && <SignUp handleCreatedUser={this.onCreatedUser}
-                    handleNavigation={this.onNavigation}
+                    {this.state.showSignup && <SignUp handleNavigation={this.onNavigation}
                     ></SignUp>}
         </div>
       );
