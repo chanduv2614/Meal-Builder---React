@@ -7,19 +7,30 @@ class login extends Component {
       email: '',
       password:'',
       IsInvalidCredentails:false,
+      formErrors: [],
+    }
+    constructor(){
+      super();
+    this.baseStateErrors=[...this.state.formErrors];
     }
 
     changeHandler = event => {
       this.setState({
         [event.target.name]: event.target.value
       });
-  }
+    }
 
   onLoginUser=()=>{
+    debugger
     const data = {
       'emailaddress':this.state.email.toString(),
       'password':this.state.password.toString(),
      };
+
+    //  this.validateField('email',this.state.email.toString());
+    //  this.validateField('password',this.state.password.toString());
+
+     if(this.state.formErrors.length===0){
 
      const config = {
       headers: {
@@ -40,6 +51,26 @@ class login extends Component {
       })
         .catch(err => console.log("error: ",err));
     }
+    }
+
+    validateField(fieldName, value) {
+      debugger
+      const fieldValidationErrors = this.state.formErrors;
+    
+      switch(fieldName) {
+        case 'email':
+          if(value.match(/^([\w.%+-]+)@([\w-]+\.)+([\w]{2,})$/i)===null)
+            fieldValidationErrors.push(fieldName+' is invalid.');
+          break;
+        case 'password':
+          if(value.length < 6)
+            fieldValidationErrors.push(fieldName+' is too short');
+          break;
+        default:
+          break;
+      }
+      this.setState({formErrors: fieldValidationErrors});
+    }
 
     render() { 
         return ( 
@@ -50,6 +81,11 @@ class login extends Component {
                   <div className="card-body">
                     <h5 className="card-title text-center">login</h5>
                     <div className="form-signin">
+
+                      <ul className="list-group">
+                      {this.state.formErrors.map(error=><li key={error} className="list-item text-danger">{error}</li>)}
+                      </ul>
+
                     {this.state.IsInvalidCredentails && <h5 className='text-danger'>Invalid Credentials.</h5>}
                       <div className="form-label-group">
                       <label htmlFor="inputEmail">Email address</label>
@@ -71,7 +107,7 @@ class login extends Component {
                         <input type="checkbox" className="custom-control-input" id="customCheck1" />
                         <label className="custom-control-label" htmlFor="customCheck1">Remember password</label>
                       </div>
-                      <button className="btn btn-lg btn-primary btn-block text-uppercase" onClick={this.onLoginUser}>log me in</button>
+                      <button className="btn btn-lg btn-primary btn-block" onClick={this.onLoginUser}>log me in</button>
                       <hr className="my-4" />
                     </div>
                     <a href="#" className="float-right" onClick={()=>this.props.handleNavigation("signup")}>Create new account</a>

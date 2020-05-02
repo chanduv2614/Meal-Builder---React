@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 
 class mymeal extends Component {
     render() { 
-        console.log(this.props.selectedItem);
         return ( 
             <div className="container">
                 <div className="row col-xs-4">
@@ -16,7 +15,7 @@ class mymeal extends Component {
                     </div>
                     </div>
                     <div className="col-xs-1">
-                        <a href="#" className="btn btn-warning float-left" onClick={()=> this.props.handleRemoveClick(this.props.selectedItem.itemId)}>-</a>
+                        <a href="#" className="btn btn-warning float-left" onClick={()=> this.props.handleRemoveClick(this.props.selectedItem.itemId)}>x</a>
                     </div>
                 </div>
             </div>

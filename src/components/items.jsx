@@ -21,20 +21,6 @@ componentWillMount(){
     render() { 
         return ( 
                 <div className="container">
-                    {this.state.riceItems.length > 0 &&
-                    <React.Fragment>
-                    <div className="row">
-                        <h5 className="text-primary">Rice Items</h5>
-                    </div>
-                    <div className="row">
-                    {this.state.riceItems.map(items=>
-                        <Item key={items.itemId} mealItem={items} handleAddClick={this.props.handleClick}></Item>
-                        )}
-                    </div>
-                    <hr/>
-                    </React.Fragment>
-                    }
-
 {this.state.starterItems.length > 0 &&
                     <React.Fragment>
                     <div className="row">
@@ -48,7 +34,6 @@ componentWillMount(){
                     <hr/>
                     </React.Fragment>
                     }
-
 {this.state.soupsItems.length > 0 &&
                     <React.Fragment>
                     <div className="row">
@@ -56,6 +41,19 @@ componentWillMount(){
                     </div>
                     <div className="row">
                     {this.state.soupsItems.map(items=>
+                        <Item key={items.itemId} mealItem={items} handleAddClick={this.props.handleClick}></Item>
+                        )}
+                    </div>
+                    <hr/>
+                    </React.Fragment>
+                    }
+{this.state.riceItems.length > 0 &&
+                    <React.Fragment>
+                    <div className="row">
+                        <h5 className="text-primary">Rice Items</h5>
+                    </div>
+                    <div className="row">
+                    {this.state.riceItems.map(items=>
                         <Item key={items.itemId} mealItem={items} handleAddClick={this.props.handleClick}></Item>
                         )}
                     </div>

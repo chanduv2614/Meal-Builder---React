@@ -8,6 +8,12 @@ import SignUp from './signup';
 import Home from './home';
 import axios from "axios";
 
+import img_biryani from '../images/biryani.jpg';
+import img_curdrice from '../images/curdrice.jpg';
+import img_checkensoup from '../images/chickensoup.jpg';
+import img_manchuria from '../images/manchuria.jpg';
+import img_cooldrink from '../images/cooldrink.jpg';
+import img_icecream from '../images/icecream.jpg';
 
 class app extends Component {
     state = { 
@@ -31,7 +37,19 @@ class app extends Component {
 
     setResponse(response){
         const _items=response.map(c => {
-            c.image=mb;
+            if(c.category==="rice" && c.itemName ==="Biryani")
+                c.image=img_biryani;
+            else if(c.category==="rice")
+                c.image=img_curdrice;
+            else if(c.category==="starter")
+                c.image=img_manchuria;
+            else if(c.category==="soups & salads")
+                c.image=img_checkensoup;
+            else if(c.category==="beverage")
+                c.image=img_cooldrink;
+            else if(c.category==="desert")
+                c.image=img_icecream;
+
             return c;
         });
         this.setState({items: _items});
